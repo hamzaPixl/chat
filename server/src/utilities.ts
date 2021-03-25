@@ -1,6 +1,6 @@
-import { Session } from './types'
+import { Session } from './types';
 
 // Helpers
 export function getUniqueUsersOnlineByUsername(activeUserSessions: Session[]) {
-  return [...new Set(activeUserSessions.map((userSession) => userSession.username))]
+  return [...new Set(activeUserSessions.map((userSession) => userSession.username))];
 }
