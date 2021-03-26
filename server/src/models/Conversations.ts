@@ -1,7 +1,7 @@
 import paginate from 'mongoose-paginate-v2';
 import { Schema, model, Document } from 'mongoose';
 
-import Messages from './Messages';
+import Messages, { IMessage } from './Messages';
 
 const Conversation = new Schema({
   messages: {
@@ -25,6 +25,10 @@ const Conversation = new Schema({
 Conversation.plugin(paginate);
 
 export interface IConversation extends Document {
+  messages: IMessage[];
+  isDeleted: boolean;
+  room: string;
+  createdAt: Date;
 }
 
 export default model<IConversation>('Conversations', Conversation);

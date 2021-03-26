@@ -1,6 +1,6 @@
 import config from 'config';
 import paginate from 'mongoose-paginate-v2';
-import { Schema, model, Document} from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
 const User = new Schema({
   username: {
@@ -76,7 +76,32 @@ const User = new Schema({
 
 User.plugin(paginate);
 
+export interface IGeneral extends Document {
+  email: string;
+  avatar: string;
+  firstName: string;
+  lastName: string;
+  birthdate: Date;
+}
+
+export interface IActivity extends Document {
+  lastResetPassword: Date;
+  lastLogging: Date;
+}
+
+export interface ISettings extends Document {
+  timezone: string;
+  status: string;
+}
+
 export interface IUser extends Document {
+  username: string;
+  password: string;
+  salt: string;
+  settings: ISettings;
+  activity: IActivity;
+  general: IGeneral;
+  contacts: string[];
 }
 
 export default model<IUser>('Users', User);

@@ -20,6 +20,10 @@ const Message = new Schema({
 });
 
 export interface IMessage extends Document {
+  body: string;
+  isDeleted: boolean;
+  from: string;
+  createdAt: Date;
 }
 
 export default model<IMessage>('Messages', Message);

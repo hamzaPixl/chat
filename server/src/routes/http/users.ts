@@ -6,5 +6,4 @@ router.get('/', (request, response) => {
   response.send([]);
 });
 
-
 export const UsersController: Router = router;

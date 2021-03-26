@@ -71,9 +71,9 @@ function handler(socket: any) {
 }
 
 db.connect().then(() => {
-  httpServer.app.use('/api/messages', MessagesController)
-  httpServer.app.use('/api/rooms', RoomsController)
-  httpServer.app.use('/api/users', UsersController)
+  httpServer.app.use('/api/messages', MessagesController);
+  httpServer.app.use('/api/rooms', RoomsController);
+  httpServer.app.use('/api/users', UsersController);
   httpServer.start();
   socketServer.addHandler('connection', handler);
 });

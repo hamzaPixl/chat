@@ -2,7 +2,7 @@ import { Schema, model, Document } from 'mongoose';
 import paginate from 'mongoose-paginate-v2';
 import { nanoid } from 'nanoid';
 
-import Conversations from './Conversations';
+import Conversations, { IConversation } from './Conversations';
 
 const Room = new Schema({
   conversation: {
@@ -45,6 +45,14 @@ const Room = new Schema({
 Room.plugin(paginate);
 
 export interface IRoom extends Document {
+  tags: string[];
+  users: string[];
+  isDeleted: boolean;
+  password: string;
+  title: string;
+  shortId: string;
+  conversation: IConversation;
+  createdAt: Date;
 }
 
 export default model<IRoom>('Rooms', Room);
