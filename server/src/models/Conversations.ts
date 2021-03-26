@@ -1,5 +1,5 @@
 import paginate from 'mongoose-paginate-v2';
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
 import Messages from './Messages';
 
@@ -24,4 +24,7 @@ const Conversation = new Schema({
 
 Conversation.plugin(paginate);
 
-export default model('Conversations', Conversation);
+export interface IConversation extends Document {
+}
+
+export default model<IConversation>('Conversations', Conversation);

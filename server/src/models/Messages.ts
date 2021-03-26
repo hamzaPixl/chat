@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 
 const Message = new Schema({
   body: {
@@ -19,4 +19,7 @@ const Message = new Schema({
   },
 });
 
-export default model('Messages', Message);
+export interface IMessage extends Document {
+}
+
+export default model<IMessage>('Messages', Message);

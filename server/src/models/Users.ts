@@ -1,6 +1,6 @@
 import config from 'config';
 import paginate from 'mongoose-paginate-v2';
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document} from 'mongoose';
 
 const User = new Schema({
   username: {
@@ -59,8 +59,8 @@ const User = new Schema({
       required: false,
       default: config.get('defaultTimezone'),
     },
-    available: {
-      type: Boolean,
+    status: {
+      type: ['online', 'offline', 'busy'],
       required: false,
     },
   },
@@ -76,4 +76,7 @@ const User = new Schema({
 
 User.plugin(paginate);
 
-export default model('Users', User);
+export interface IUser extends Document {
+}
+
+export default model<IUser>('Users', User);

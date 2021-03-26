@@ -1,12 +1,12 @@
-import { Request, Response } from 'express';
-
 import HttpServer from './server/HttpServer';
 import SocketServer from './server/SocketServer';
 import db from './lib/mongo/db';
-
 import logger from './lib/logger';
+
 import { Message, User, Session } from './types';
 import { getUniqueUsersOnlineByUsername } from './utilities';
+
+import { MessagesController, UsersController, RoomsController } from './routes/http';
 
 let messages: Message[] = [];
 let users: User[] = [];
@@ -14,14 +14,6 @@ let activeUserSessions: Session[] = [];
 
 const httpServer = new HttpServer();
 const socketServer = new SocketServer(httpServer.server);
-
-httpServer.app.get('/api/messages', (request: Request, response: Response) => {
-  response.send({ messages });
-});
-
-httpServer.app.get('/api/users', (request: Request, response: Response) => {
-  response.send({ users });
-});
 
 function handler(socket: any) {
   const { id } = socket.client;
@@ -79,6 +71,9 @@ function handler(socket: any) {
 }
 
 db.connect().then(() => {
+  httpServer.app.use('/api/messages', MessagesController)
+  httpServer.app.use('/api/rooms', RoomsController)
+  httpServer.app.use('/api/users', UsersController)
   httpServer.start();
   socketServer.addHandler('connection', handler);
 });

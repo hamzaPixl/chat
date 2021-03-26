@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { Schema, model, Document } from 'mongoose';
 import paginate from 'mongoose-paginate-v2';
 import { nanoid } from 'nanoid';
 
@@ -44,4 +44,7 @@ const Room = new Schema({
 
 Room.plugin(paginate);
 
-export default model('Rooms', Room);
+export interface IRoom extends Document {
+}
+
+export default model<IRoom>('Rooms', Room);
