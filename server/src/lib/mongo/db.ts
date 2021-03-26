@@ -1,7 +1,7 @@
-import mongoose from 'mongoose'
-import config from 'config'
+import mongoose from 'mongoose';
+import config from 'config';
 
-import logger from './logger';
+import logger from '../logger';
 
 class Db {
   constructor() {
@@ -35,11 +35,11 @@ class Db {
       useCreateIndex: true,
       useUnifiedTopology: true,
     });
-  };
+  }
 
   async close() {
     await mongoose.disconnect();
-  };
+  }
 }
 
 export default new Db();

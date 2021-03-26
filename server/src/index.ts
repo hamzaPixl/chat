@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import HttpServer from './server/HttpServer';
 import SocketServer from './server/SocketServer';
-import db from './lib/db';
+import db from './lib/mongo/db';
 
 import logger from './lib/logger';
 import { Message, User, Session } from './types';
@@ -81,4 +81,4 @@ function handler(socket: any) {
 db.connect().then(() => {
   httpServer.start();
   socketServer.addHandler('connection', handler);
-})
+});
